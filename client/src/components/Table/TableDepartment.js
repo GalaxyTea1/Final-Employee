@@ -8,7 +8,7 @@ function TableDepartment() {
         fetch('http://localhost:5000/departments')
             .then((res) => res.json())
             .then((result) => {
-                setDepartmentItem(result);
+                setDepartmentItem(result.department);
             });
     }, []);
 
