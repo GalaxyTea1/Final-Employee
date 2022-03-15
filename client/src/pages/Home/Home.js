@@ -1,8 +1,7 @@
-import React from 'react';
-import LayoutHome from '../../components/layout/Layout';
+import React from "react";
 
 function Home() {
-    return <LayoutHome />;
+  return <></>;
 }
 
 export default Home;
