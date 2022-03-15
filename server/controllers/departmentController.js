@@ -1,22 +1,31 @@
 const pool = require('../db');
 
 const departmentController = {
-    getDepartment: async (req, res) => {
+    getDepartments: async (req, res) => {
         try {
-            const allDepartments = await pool.query('SELECT * FROM department');
+            const getDepartments = await pool.query('SELECT * FROM department');
             res.status(200).json({
                 success: true,
-                msg: 'Get Department Successfull',
-                department: allDepartments.rows,
+                msg: 'Get Departments Successfull',
+                department: getDepartments.rows,
             });
         } catch (error) {
             console.log(error.message);
             res.status(500).json({ success: false, msg: 'Internal server error' });
         }
     },
-    getADepartment: async (req, res) => {
+    getDepartment: async (req, res) => {
         try {
-            const aDepartment = await pool.query('SELECT * FROM department WHERE department');
+            const { id } = req.params;
+            const getDepartment = await pool.query(
+                'SELECT * FROM department WHERE department.department_id = $1',
+                [id]
+            );
+            res.status(200).json({
+                success: true,
+                msg: 'Get Department Successfull',
+                department: getDepartment.rows[0],
+            });
         } catch (error) {
             console.log(error.message);
             res.status(500).json({ success: false, msg: 'Internal server error' });
