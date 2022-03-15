@@ -1,12 +1,14 @@
-import React from "react";
-import TableEditEmployee from "../Table/TableEditEmployee";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import TableEditEmployee from '../Table/TableEditEmployee';
 
 function EditEmployee() {
-  return (
-    <div>
-      <TableEditEmployee />
-    </div>
-  );
+    const { id } = useParams();
+    return (
+        <div>
+            <TableEditEmployee id={id} />
+        </div>
+    );
 }
 
 export default EditEmployee;

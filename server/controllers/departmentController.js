@@ -14,6 +14,14 @@ const departmentController = {
             res.status(500).json({ success: false, msg: 'Internal server error' });
         }
     },
+    getADepartment: async (req, res) => {
+        try {
+            const aDepartment = await pool.query('SELECT * FROM department WHERE department');
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).json({ success: false, msg: 'Internal server error' });
+        }
+    },
     createDepartment: async (req, res) => {
         try {
             const { department_name } = req.body;

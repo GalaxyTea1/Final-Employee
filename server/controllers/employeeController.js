@@ -16,6 +16,23 @@ const employeeController = {
             res.status(500).json({ success: false, msg: 'Internal server error' });
         }
     },
+    getEmployee: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const anEmployees = await pool.query(
+                'SELECT employee_id, firstname, lastname, email, department.department_name, department.department_id FROM employee JOIN department ON employee.department_id = department.department_id WHERE employee_id = $1',
+                [id]
+            );
+            res.status(200).json({
+                success: true,
+                msg: 'Get Employee Successfull',
+                employee: anEmployees.rows[0],
+            });
+        } catch (error) {
+            console.log(error.message);
+            res.status(500).json({ success: false, msg: 'Internal server error' });
+        }
+    },
     createEmployee: async (req, res) => {
         try {
             const { firstname, lastname, email, department_id } = req.body;
